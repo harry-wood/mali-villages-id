@@ -58,18 +58,18 @@
       <h1>Question</h1>
       <h3 id="city">City</h3>
       <button id="point" class="btn btn-inverse">
-          <i class="icon icon-white icon-map-marker"></i> Add an Urban Park Marker 
+          <i class="icon icon-white icon-map-marker"></i> I see a village
       </button>
-      <button id="noPark" class="btn btn-submit">I do not see an urban park</button>
+      <button id="noPark" class="btn btn-submit">I do not see a village</button>
       <button id="noCity" class="btn btn-submit" style="display:none;">City not found!</button>
 
       <p>Task: <span id="task-id" class="label label-warning">#</span></p>
       <div id="map"></div>
-      <i class="icon-map-marker"></i> Urban park position: <strong> Longitude:</strong> <span id="lon"></span>, 
+      <i class="icon-map-marker"></i> Village position: <strong> Longitude:</strong> <span id="lon"></span>,
       <strong>Latitude:</strong> <span id="lat"></span>
     </div>
     <div id="answer">
-        <button id="answerbtn" class="btn btn-success btn-submit"><i class="icon-check icon-white"></i> Save these coordinates for the urban park</button>
+        <button id="answerbtn" class="btn btn-success btn-submit"><i class="icon-check icon-white"></i> Save these coordinates for the village</button>
     </div>
   </div>
 </div>
@@ -118,7 +118,7 @@ function addCity(task) {
             var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
             task.cityLayer.addFeatures([new OpenLayers.Feature.Vector(point)]);
             // Center the map
-            task.map.setCenter(lonLat,13);
+            task.map.setCenter(lonLat,15);
             // Reset the lon & lat span objects
             $("#lon").text("-");
             $("#lat").text("-");
@@ -160,8 +160,13 @@ pybossa.taskLoaded(function(task, deferred){
         });
 
         // Layers
-        // Open Street Map (default layer)
-        map.addLayer(new OpenLayers.Layer.OSM("Open Street Map"));
+
+        // Bing Aerial imagery (default layer)
+        map.addLayer(new OpenLayers.Layer.Bing({
+            name: "Bing Aerial",
+            //key: apiKey, TODO: need Bing Maps API key
+            type: "AerialWithLabels"
+        }));
 
         // Google Maps Satellite layer
         map.addLayer(new OpenLayers.Layer.Google(
@@ -174,6 +179,9 @@ pybossa.taskLoaded(function(task, deferred){
             "Google Physical",
             {type: google.maps.MapTypeId.TERRAIN}
         ));
+
+        // Open Street Map
+        map.addLayer(new OpenLayers.Layer.OSM("Open Street Map"));
 
         // Icon for the City Marker
         var styleMapCity = new OpenLayers.StyleMap({
@@ -345,6 +353,6 @@ pybossa.presentTask(function(task, deferred){
     }
 });
 
-pybossa.run('urbanpark');
+pybossa.run('mali-villages-id');
 </script>
 

@@ -1,7 +1,7 @@
 {
-    "name": "Urban Parks",
-    "short_name": "urbanpark",
-    "thumbnail": "http://img41.imageshack.us/img41/6581/urbanparksthumbnail.png",
-    "description": "Help us to find urban parks",
-    "question": "Find one urban park for this city"
+    "name": "Mali Villages",
+    "short_name": "mali-villages-id",
+    "thumbnail": "",
+    "description": "Help us to identify villages in Mali",
+    "question": "Identify some villages in this area"
 }
